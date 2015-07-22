@@ -14,3 +14,8 @@
 .container.content .wauto {
     width: auto;
 }
+
+.table-top {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}

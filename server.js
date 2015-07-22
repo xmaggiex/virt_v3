@@ -18,6 +18,7 @@ app.get('/api/computers', function(req, res) {
 		{
 			"name":"Komp1",
 			"ip": "192.192.192.192",
+			"status" : false,
 			"virtuals": [
 					{
 						"name" : "virt1",
@@ -39,6 +40,7 @@ app.get('/api/computers', function(req, res) {
 					{
 			"name":"Komp2",
 			"ip": "192.192.192.192",
+			"status" : true,
 			"virtuals": [
 					{
 						"name" : "virt1",
@@ -59,7 +61,8 @@ app.get('/api/computers', function(req, res) {
 			},
 					{
 			"name":"Komp3",
-			"ip": "192.192.192.192",
+			"ip": "192.192.142.192",
+			"status" : true,
 			"virtuals": [
 					{
 						"name" : "virt1",
@@ -80,7 +83,8 @@ app.get('/api/computers', function(req, res) {
 			},
 					{
 			"name":"Komp4",
-			"ip": "192.192.192.192",
+			"ip": "192.192.192.162",
+			"status" : true,
 			"virtuals": [
 					{
 						"name" : "virt1",

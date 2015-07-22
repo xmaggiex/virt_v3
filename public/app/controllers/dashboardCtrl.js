@@ -24,6 +24,13 @@ angular.module('dashboardController', ['ComputersService'])
 			}
 		}
 
+		vm.updateComputerStatus = function(index) {
+			vm.compip = vm.computers[index].ip;
+			vm.compstatus = vm.computers[index].status;
+
+
+		}
+
 		vm.makeSnapshot = function(machine, ip) {
 			if(machine) {
 				console.log("Push snapshot request");
