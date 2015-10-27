@@ -4,7 +4,7 @@
 * Description
 */
 angular.module('dashboardController', ['ComputersService'])
-	.controller('dashboardCtrl', function($scope, Computers){
+	.controller('dashboardCtrl', function($scope, ComputersService, $http){
 		var vm = this;
 
 		getData();
@@ -22,14 +22,18 @@ angular.module('dashboardController', ['ComputersService'])
 			else {
 				vm.machine[this.computer] = {};
 			}
+
+
 		}
 
 		vm.updateComputerStatus = function(index) {
 			vm.compip = vm.computers[index].ip;
 			vm.compstatus = vm.computers[index].status;
-
-
 		}
+
+		vm.getVirts = function(ip) {
+			$http.get('http://localhost:7070/api/getvirts/'+ip);
+		};
 
 		vm.makeSnapshot = function(machine, ip) {
 			if(machine) {
@@ -59,10 +63,23 @@ angular.module('dashboardController', ['ComputersService'])
 				console.log("IP Physical machine: " + ip);
 			}
 		}
+
+		vm.shutdown = function(ip) {
+			console.log(ip);
+			$http.post('http://localhost:7070/api/shutdown/' + ip);
+		}
+
 		function getData() {
-			Computers.all().success(function(data) {
-				vm.computers = data.computers;
+			ComputersService.all().success(function(data) {
+				vm.computers = data;
+				console.log(data);
+
+				for(var i =0;i<data.length;i++) {
+					vm.computers[i].virts = $http.get('http://localhost:7070/api/virtlist/'+data[i].ip);
+				}
+				console.log(vm.computers)
 			})
+
 		}
 
 		vm.refreshData = function() {

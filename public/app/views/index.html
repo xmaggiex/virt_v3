@@ -49,18 +49,17 @@
             <div role="tabpanel" class="tab-pane active" id="computer_management" ng-controller="dashboardCtrl as dashboard">
               <div class="row table-top">
                 <select ng-change="dashboard.updateComputerStatus(computerStatus)" class="pull-left form-control virt-selector pull-left" name="" ng-model="computerStatus">
-                  <option value="option">-- Please change --</option>
-                  <option value="{{$index}}" ng-repeat="computer in dashboard.computers">{{computer.name}}</option>
+                  <option value="{{$index}}" ng-repeat="computer in dashboard.computers">{{computer.ip}}</option>
                 </select>
-                {{dashboard.compip}}
+                {{dashboard.ip}}
                 {{dashboard.compstatus}}
-                <a ng-click="dashboard.turnoff(dashboard.compip)" class="btn btn-primary">Turn off</a>
+                <a ng-click="dashboard.shutdown(dashboard.compip)" class="btn btn-primary">Turn off</a>
                 <a ng-click="dashboard.reboot(dashboard.compip)" class="btn btn-primary">Reboot</a>
-                <a ng-click="dashboard.refreshData()" class="pull-right btn btn-primary" >Refresh data</a>
+                <a ng-click="dashboard.refreshData()" class="pull-right btn btn-primary">Refresh data</a>
               </div>
               <table class="table table-striped">
                 <tr>
-                  <th>Name</th>
+                  <th>Machine IP</th>
                   <th>VMname</th>
                   <th>IP</th>
                   <th>Mac Address</th>
@@ -74,12 +73,13 @@
                   <th>Actions</th>
                 </tr>
                 <tr ng-repeat="computer in dashboard.computers" ng-init="computerIndex = $index">
-                  <td>{{computer.name}}</td>
+                  <td>{{computer.ip}}</td>
 
                     <td><select class="form-control" name="virtuals" ng-model="virtIndex" ng-change="dashboard.updateStatusRow(computerIndex,virtIndex)">
                       <option value="">Please select --</option>
-                      <option  ng-repeat="virt in computer.virtuals" ng-value="{{$index}}">{{ virt.name }}</option>
+                      <!-- <option  ng-repeat="virt in computer.virts.$$state.value.data" ng-value="{{$index}}">{{ virt.name }}</option> -->
                     </select>
+                    {{computer.virts.$$state.value.data}}
                   </td>
                   <td>
                   {{ dashboard.machine[$index].ip }}
