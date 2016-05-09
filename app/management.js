@@ -44,16 +44,23 @@ exports.getVirts = function(req, res) {
         password: comp.password
     };
 
-    var command = 'cat /home/new/Documents/results/vmlista.txt';
+    var command = './script.sh';
 
     exec(config, command, function(error, response) {
         if (error) {
             console.log("ERROR");
         }
+        console.log("Successful retrieval from machine");
         console.log(response);
-        console.log('success');
 
-    	res.status(200).json(response);
+        var responce_lines = response.trim().split("\n");
+        var virt_machines = [];
+        for (var i = 0; i < responce_lines.length; i++) {
+            line = responce_lines[i].split(' ');
+            virt_machines[i] = {name: line[0], state: line[1]};
+        }
+        console.log(virt_machines);
+    	res.status(200).json(virt_machines);
     });
     
 }

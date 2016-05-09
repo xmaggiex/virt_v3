@@ -1,8 +1,10 @@
-var computers = [{
-        ip: '192.168.0.104',
-        username: 'new',
-        password: 'nowe123'
-}];
+var computers = [
+{
+    ip: '192.168.0.17',
+    username: 'erhesto',
+    password: 'test'
+}
+];
 
 exports.computers = function(req, res) {
     res.status(200).json(computers);

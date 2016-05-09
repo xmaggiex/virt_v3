@@ -6,7 +6,6 @@
 angular.module('dashboardController', ['ComputersService'])
 	.controller('dashboardCtrl', function($scope, ComputersService, $http){
 		var vm = this;
-
 		getData();
 
 		vm.updateStatusRow = function(computer, virt) {
@@ -17,7 +16,7 @@ angular.module('dashboardController', ['ComputersService'])
 			this.virt = virt || 0;
 			if(virt != '') {
 				var index = 2;
-				vm.machine[this.computer] = vm.computers[this.computer].virtuals[this.virt];
+				vm.machine[this.computer] = vm.computers[this.computer].virts[this.virt];
 			}
 			else {
 				vm.machine[this.computer] = {};
@@ -75,7 +74,7 @@ angular.module('dashboardController', ['ComputersService'])
 				console.log(data);
 
 				for(var i =0;i<data.length;i++) {
-					vm.computers[i].virts = $http.get('http://localhost:7070/api/virtlist/'+data[i].ip);
+					vm.computers[i].virts = $http.get('http://localhost:7070/api/virtlist/'+data[i].ip);;
 				}
 				console.log(vm.computers)
 			})

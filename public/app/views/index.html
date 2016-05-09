@@ -49,6 +49,7 @@
             <div role="tabpanel" class="tab-pane active" id="computer_management" ng-controller="dashboardCtrl as dashboard">
               <div class="row table-top">
                 <select ng-change="dashboard.updateComputerStatus(computerStatus)" class="pull-left form-control virt-selector pull-left" name="" ng-model="computerStatus">
+                  <option value="">Please select --</option>
                   <option value="{{$index}}" ng-repeat="computer in dashboard.computers">{{computer.ip}}</option>
                 </select>
                 {{dashboard.ip}}
@@ -77,16 +78,16 @@
 
                     <td><select class="form-control" name="virtuals" ng-model="virtIndex" ng-change="dashboard.updateStatusRow(computerIndex,virtIndex)">
                       <option value="">Please select --</option>
-                      <!-- <option  ng-repeat="virt in computer.virts.$$state.value.data" ng-value="{{$index}}">{{ virt.name }}</option> -->
+                      <option  ng-repeat="virt in computer.virts.$$state.value.data" ng-value="{{$index}}">{{ virt.name }}</option>
                     </select>
-                    {{computer.virts.$$state.value.data}}
                   </td>
                   <td>
+                    {{d}}
                   {{ dashboard.machine[$index].ip }}
                 </td>
                 <td>{{ dashboard.machine[$index].macAddress }}</td>
                 <td>
-                   <span class="label label-success">{{ dashboard.machine[$index].status }}</span>
+                   <span class="label label-success">{{ dashboard.machine[$index].state }}</span>
                 </td>
                 <td>
                  
