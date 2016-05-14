@@ -74,13 +74,14 @@
                   <th>Actions</th>
                 </tr>
                 <tr ng-repeat="computer in dashboard.computers" ng-init="computerIndex = $index">
-                  <td>{{computer.ip}}</td>
-
+                  <td>{{computer}}</td>
+                    <!--
                     <td><select class="form-control" name="virtuals" ng-model="virtIndex" ng-change="dashboard.updateStatusRow(computerIndex,virtIndex)">
                       <option value="">Please select --</option>
-                      <option  ng-repeat="virt in computer.virts.$$state.value.data" ng-value="{{$index}}">{{ virt.name }}</option>
+                      <option  ng-repeat="virt in computer.virts" ng-value="{{$index}}">{{ virt.name }}</option>
                     </select>
                   </td>
+                  -->
                   <td>
                     {{d}}
                   {{ dashboard.machine[$index].ip }}

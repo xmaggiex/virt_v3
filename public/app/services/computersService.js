@@ -3,12 +3,20 @@
 *
 * Description
 */
-angular.module('ComputersService', []).factory('ComputersService', function($http){
+angular.module('ComputersService', []).factory('CompService', ['$http', function($http){
 
-	var service = {};
+    return {
+        getComputers: function() {
+            return $http.get('http://localhost:7070/api/computers');
+        }
+    }
+}]);
 
-	service.all = function() {
-		return $http.get('http://localhost:7070/api/computers');
-	}
-	return service;
-})
+angular.module('ComputersService').factory('VirtService', ['$http', function($http) {
+    
+    return {
+        getVirts: function() {
+            return $http.get('http://localhost:7070/api/virtlist/192.168.017');
+        }
+    }
+}]);

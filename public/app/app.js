@@ -3,4 +3,4 @@
 * main App module
 *
 */
-angular.module('virtApp', ['dashboardController']);
+angular.module('virtApp', ['mainController']);

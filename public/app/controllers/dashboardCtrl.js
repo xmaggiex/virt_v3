@@ -4,7 +4,7 @@
 * Description
 */
 angular.module('dashboardController', ['ComputersService'])
-	.controller('dashboardCtrl', function($scope, ComputersService, $http){
+	.controller('dashboardCtrl', ['$scope', '$http', 'CompService', 'VirtService', function($scope, $http, CompService, VirtService){
 		var vm = this;
 		getData();
 
@@ -69,14 +69,17 @@ angular.module('dashboardController', ['ComputersService'])
 		}
 
 		function getData() {
-			ComputersService.all().success(function(data) {
+			CompService.getComputers().success(function(data) {
 				vm.computers = data;
-				console.log(data);
 
-				for(var i =0;i<data.length;i++) {
-					vm.computers[i].virts = $http.get('http://localhost:7070/api/virtlist/'+data[i].ip);;
-				}
-				console.log(vm.computers)
+				for(var i=0;i<1;i++) {
+                    VirtService.getVirts().success(function(data) {
+                        vm.computers[0].virts = [{name:"vm1",status:"running"}];
+                    });
+					//vm.computers[i].virts = $http.get('http://localhost:7070/api/virtlist/'+data[i].ip);
+
+                    //vm.computers[0].virts = [{name:"vm1",status:"running"}];
+                }
 			})
 
 		}
@@ -84,4 +87,4 @@ angular.module('dashboardController', ['ComputersService'])
 		vm.refreshData = function() {
 			getData();
 		}
-	});
+	}]);

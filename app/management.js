@@ -44,8 +44,8 @@ exports.getVirts = function(req, res) {
         password: comp.password
     };
 
-    var command = './script.sh';
-
+    // var command = './script.sh';
+    /*
     exec(config, command, function(error, response) {
         if (error) {
             console.log("ERROR");
@@ -61,8 +61,21 @@ exports.getVirts = function(req, res) {
         }
         console.log(virt_machines);
     	res.status(200).json(virt_machines);
+
     });
-    
+    */
+    var virt_machines = [];
+    if (req.params.ip === '192.168.0.17') {
+        virt_machines = [
+            {name: "vm1", status: "running"}
+        ];
+    }
+    else {
+        virt_machines = [
+            {name: "vm2", status: "shut"}
+        ]
+    }
+    res.status(200).json(virt_machines);
 }
 
 function findComputerbyIP(ip) {

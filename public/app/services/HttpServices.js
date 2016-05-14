@@ -10,8 +10,17 @@ angular.module('HttpServices', [])
 angular.module('HttpServices')
     .factory('virtualService', ['$http', function($http) {
         return {
-            getVirtuals: function() {
-                return $http.get('http://localhost:7070/api/virtlist/192.168.0.17');
+            getVirtuals: function(ip_addr) {
+                return $http.get('http://localhost:7070/api/virtlist/' + ip_addr);
             }
         };
     }]);
+
+angular.module('HttpServices')
+    .factory('testService', ['$http', function($http) {
+        return {
+            getTest: function() {
+                return $http.jsonp('https://angularjs.org/greet.php?callback=JSON_CALLBACK&name=Super%20Hero')
+            }
+        };
+    }])
