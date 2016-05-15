@@ -49,18 +49,14 @@
             <div role="tabpanel" class="tab-pane active" id="computer_management">
                 {{dashboard.computers}}<br>
                 <div class="row table-top">
-                    <!--
-                    <select ng-change="dashboard.updateComputerStatus(computerStatus)" class="pull-left form-control virt-selector pull-left" name="" ng-model="computerStatus">
+
+                    <select ng-change="dashboard.updateCurrentComputer(computerIndex)" class="pull-left form-control virt-selector pull-left" name="" ng-model="computerIndex">
                         <option value="">Please select --</option>
                         <option value="{{$index}}" ng-repeat="computer in dashboard.computers">{{computer.ip}}</option>
                     </select>
-                    {{dashboard.ip}}
-                    {{dashboard.compstatus}}
-
-                    <a ng-click="dashboard.shutdown(dashboard.compip)" class="btn btn-primary">Turn off</a>
-                    <a ng-click="dashboard.reboot(dashboard.compip)" class="btn btn-primary">Reboot</a>
+                    <a ng-click="dashboard.shutdown(dashboard.current_computer.ip)" class="btn btn-primary">Turn off</a>
+                    <a ng-click="dashboard.reboot(dashboard.current_computer.ip)" class="btn btn-primary">Reboot</a>
                     <a ng-click="dashboard.refreshData()" class="pull-right btn btn-primary">Refresh data</a>
-                -->
                 </div>
                 <table class="table table-striped">
                     <tr>
@@ -92,10 +88,10 @@
                             {{ computer.virts[computer.current_machine_index].mac }}
                         </td>
                         <td>
-                            {{ computer.virts[computer.current_machine_index].state }}
+                            <span class="label label-{{ dashboard.status_color[computer.virts[computer.current_machine_index].state] }}">{{ computer.virts[computer.current_machine_index].state }}</span>
                         </td>
                         <td>
-                            <span class="label label-{{ dashboard.getStatusColor(computer.virts[computer.current_machine_index].status) }}">{{ computer.virts[computer.current_machine_index].status }}</span>
+                            <span class="label label-{{ dashboard.status_color[computer.virts[computer.current_machine_index].status] }}">{{ computer.virts[computer.current_machine_index].status }}</span>
                         </td>
                         <td>
                             {{ computer.virts[computer.current_machine_index].disk_size }}
@@ -112,11 +108,13 @@
                         <td>
                             {{ computer.virts[computer.current_machine_index].last_change }}
                         </td>
-                        <td>
-                            {{ computer.virts[computer.current_machine_index].ip }}
+                        <td class="text-nowrap">
+                            <a ng-click="dashboard.makeSnapshot(dashboard.machine[$index], computer.ip)" class="btn btn-primary btn-sm btn-info">Snapshot</a>
+                            <a ng-click="dashboard.clone(dashboard.machine[$index], computer.ip)" class="btn btn-primary btn-sm btn-info">Clone</a>
+                            <a ng-click="dashboard.startVirt(dashboard.machine[$index], computer.ip)" class="btn btn-primary btn-sm btn-warning">Start</a>
+                            <a ng-click="dashboard.stopVirt(dashboard.machine[$index], computer.ip)" class="btn btn-primary btn-sm btn-danger">Stop</a>
                         </td>
                     </tr>
-
                 </table>
                 <div class="row">
                     <a href="#" class="btn btn-primary btn-danger">Reboot all physical machines</a><br><br>
@@ -125,14 +123,16 @@
                     <div class="form-group">
                         <a href="#" class="btn btn-primary btn-success pull-left">Start selected on all</a>
                         <select class="form-control virt-selector pull-left" name="">
-                            <option value="option">option</option>
+                            <option value="">Select option</option>
+                            <option ng-repeat="virt in dashboard.virt_list.concat().sort()">{{ virt }}</option>
                         </select>
                     </div>
                     <br><br>
                     <div class="form-group">
                         <a href="#" class="btn btn-primary btn-danger pull-left">Stop selected on all</a>
                         <select class="form-control virt-selector pull-left" name="">
-                            <option value="option">option</option>
+                            <option value="">Select option</option>
+                            <option ng-repeat="virt in dashboard.virt_list.concat().sort()">{{ virt }}</option>
                         </select>
                     </div>
                 </div>
@@ -145,9 +145,7 @@
                         Select VM <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Virt Name</a></li>
-                        <li><a href="#">Virt Name</a></li>
-                        <li><a href="#">Virt Name</a></li>
+                        <li ng-repeat="line in dashboard.virt_list.concat().sort()"><a href="">{{ line }}</a></li>
                     </ul>
                 </div>
                 <br/>
