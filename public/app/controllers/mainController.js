@@ -32,6 +32,10 @@ angular.module('mainController', ['HttpServices'])
             vm.computer2Virt = computerList;
         }
 
+        vm.refreshData = function() {
+            getData();
+        }
+
         function getData() {
             computerService.getComputers().success(function(data) {
                 vm.computers = data;

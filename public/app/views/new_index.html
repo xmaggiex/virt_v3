@@ -47,7 +47,9 @@
         <!-- Tab panes -->
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="computer_management">
+                {{ dashboard.computers }}
                 <br>
+                {{ dashboard.virt_list }}
                 <div class="row table-top">
 
                     <select ng-change="dashboard.updateCurrentComputer(computerIndex)" class="pull-left form-control virt-selector pull-left" name="" ng-model="computerIndex">
@@ -78,7 +80,7 @@
                         <td>
                             <select name="virtuals" class="form-control" ng-model="virtIndex" ng-change="dashboard.updateStatus(computerIndex,virtIndex)">
                                 <option value="">Please select --</option>
-                                <option ng-repeat="virt in computer.virts" ng-value="{{$index}}">{{virt.name}}</option>
+                                <option ng-repeat="virt in computer.virts.concat().sort()" ng-value="{{$index}}">{{virt.name}}</option>
                             </select>
                         </td>
                         <td>

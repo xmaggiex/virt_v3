@@ -44,15 +44,15 @@ exports.getVirts = function(req, res) {
         password: comp.password
     };
 
-    // var command = './script.sh';
-    /*
+    var command = 'perl virt_scripts/comm.pl';
+
     exec(config, command, function(error, response) {
         if (error) {
             console.log("ERROR");
         }
         console.log("Successful retrieval from machine");
         console.log(response);
-
+        /*
         var responce_lines = response.trim().split("\n");
         var virt_machines = [];
         for (var i = 0; i < responce_lines.length; i++) {
@@ -60,10 +60,13 @@ exports.getVirts = function(req, res) {
             virt_machines[i] = {name: line[0], state: line[1]};
         }
         console.log(virt_machines);
+        */
+        var virt_machines = JSON.parse(response);
     	res.status(200).json(virt_machines);
 
     });
-    */
+
+    /*
     var virt_machines = [];
     if (req.params.ip === '192.168.0.17') {
         virt_machines = [
@@ -89,6 +92,7 @@ exports.getVirts = function(req, res) {
         virt_machines[i].last_change = "today";
     }
     res.status(200).json(virt_machines);
+     */
 }
 
 function findComputerbyIP(ip) {
