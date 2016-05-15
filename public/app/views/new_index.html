@@ -47,7 +47,7 @@
         <!-- Tab panes -->
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="computer_management">
-                {{dashboard.computers}}<br>
+                <br>
                 <div class="row table-top">
 
                     <select ng-change="dashboard.updateCurrentComputer(computerIndex)" class="pull-left form-control virt-selector pull-left" name="" ng-model="computerIndex">
@@ -145,7 +145,7 @@
                         Select VM <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                        <li ng-repeat="line in dashboard.virt_list.concat().sort()"><a href="">{{ line }}</a></li>
+                        <li ng-repeat="line in dashboard.virt_list.concat().sort()"><a ng-click="dashboard.updateComputers2Virt(line)">{{ line }}</a></li>
                     </ul>
                 </div>
                 <br/>
@@ -159,9 +159,9 @@
                         <th>IP</th>
                         <th>CPU</th>
                     </tr>
-                    <tr>
-                        <td>Comp 1</td>
-                        <td><span class="label label-{{ dashboard.getStatusColor('running') }}">Running</span></td>
+                    <tr ng-repeat="computer in dashboard.computer2Virt">
+                        <td>{{ computer.name }}</td>
+                        <td><span class="label label-{{ dashboard.status_color['running'] }}">Running</span></td>
                         <td>15:28 08.06.2015</td>
                         <td>192.192.192.192</td>
                         <td>50%</td>

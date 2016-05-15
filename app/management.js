@@ -72,7 +72,7 @@ exports.getVirts = function(req, res) {
     }
     else {
         virt_machines = [
-            {name: "vm3", status: "shut"},
+            {name: "vm1", status: "shut"},
             {name: "vm2", status: "running", state: "crashed"}
         ]
     }

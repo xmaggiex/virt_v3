@@ -1,14 +1,11 @@
 angular.module('mainController', ['HttpServices'])
     .controller('mainController',['$scope', 'computerService', 'virtualService', 'testService', function($scope, computerService,virtualService, testService) {
         vm = this;
-        //testService.getTest().success(function(data) {
-        //    vm.test = data
-        //});
+
         getData();
         vm.current_computer = {ip: 10, status: "ok"};
         vm.lines = ['costam', 'inne', 'other'];
         vm.virt_list = [];
-        //vm.status_line = ['danger', 'warning', 'info', 'success'];
         vm.status_color = {running: 'success', shut: 'default', ok: 'info', crashed: 'danger'};
         vm.getStatusColor = function(status) {
             return vm.status_object[status];
@@ -21,6 +18,18 @@ angular.module('mainController', ['HttpServices'])
         vm.updateCurrentComputer = function(computerIndex) {
             vm.current_computer.ip = vm.computers[computerIndex].ip;
             vm.current_computer.status = vm.computers[computerIndex].status;
+        }
+
+        vm.updateComputers2Virt = function(virtName) {
+            var computerList = [];
+            for (var compIndex = 0; compIndex < vm.computers.length; compIndex++) {
+                for (var virtIndex = 0; virtIndex < vm.computers[compIndex].virts.length; virtIndex++) {
+                    if (vm.computers[compIndex].virts[virtIndex].name === virtName) {
+                        computerList.push(vm.computers[compIndex]);
+                    }
+                }
+            }
+            vm.computer2Virt = computerList;
         }
 
         function getData() {
