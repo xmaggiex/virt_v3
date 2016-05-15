@@ -5,7 +5,12 @@ angular.module('mainController', ['HttpServices'])
         //    vm.test = data
         //});
         getData();
-        vm.line = [{name: "costam", other: "blabla"}]
+        vm.line = [{name: "costam", other: "blabla"}];
+        //vm.status_line = ['danger', 'warning', 'info', 'success'];
+        vm.status_object = {running: 'success', shut: 'default'};
+        vm.getStatusColor = function(status) {
+            return vm.status_object[status];
+        };
 
         vm.updateStatus = function(computerIndex, virtIndex) {
             vm.computers[computerIndex].current_machine_index = virtIndex;
