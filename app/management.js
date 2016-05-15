@@ -76,6 +76,16 @@ exports.getVirts = function(req, res) {
             {name: "vm2", status: "running"}
         ]
     }
+    for (var i = 0; i < virt_machines.length; i++) {
+        virt_machines[i].ip = "0009000";
+        virt_machines[i].mac = "21209";
+        virt_machines[i].state = "ok";
+        virt_machines[i].disk_size = "5 gb";
+        virt_machines[i].disk_available_size = "2 gb";
+        virt_machines[i].last_login = "yesterday";
+        virt_machines[i].cpu = "20";
+        virt_machines[i].last_change = "today";
+    }
     res.status(200).json(virt_machines);
 }
 
