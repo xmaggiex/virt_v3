@@ -28,6 +28,25 @@ exports.shutdown = function(req, res) {
     res.status(200).json("success");
 }
 
+exports.snapshot = function(req, res) {
+    var comp = findComputerbyIP(req.params.ip);
+
+    var config = {
+        host: req.params.config,
+        username: comp.username,
+        password: comp.password
+    };
+
+    var command = 'echo ' + comp.password + ' | sudo virsh -c qemu:/// snapshot ' + req.params.vm;
+
+    exec(config, command, function(error, response) {
+        if (error) {
+            console.log("ERROR during creating snapshot");
+        }
+    });
+    res.status(200).json("Successfully created snapshot");
+}
+
 
 exports.getVirts = function(req, res) {
     console.log(req.params.ip);

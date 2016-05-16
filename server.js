@@ -16,6 +16,7 @@ app.get('/', function(req, res) {
 
 app.get('/api/computers', getList.computers);
 
+app.post('/api/snapshot/:ip/:vm', management.snapshot);
 app.post('/api/shutdown/:ip', management.shutdown);
 app.get('/api/virtlist/:ip', management.getVirts);
 

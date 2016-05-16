@@ -1,10 +1,9 @@
 angular.module('mainController', ['HttpServices'])
-    .controller('mainController',['$scope', 'computerService', 'virtualService', 'testService', function($scope, computerService,virtualService, testService) {
+    .controller('mainController',['$scope', '$http', 'computerService', 'virtualService', function($scope, $http, computerService,virtualService) {
         vm = this;
 
         getData();
         vm.current_computer = {ip: 10, status: "ok"};
-        vm.lines = ['costam', 'inne', 'other'];
         vm.virt_list = [];
         vm.status_color = {running: 'success', shut: 'default', ok: 'info', crashed: 'danger'};
         vm.getStatusColor = function(status) {
@@ -30,6 +29,20 @@ angular.module('mainController', ['HttpServices'])
                 }
             }
             vm.computer2Virt = computerList;
+        }
+
+        vm.makeSnapshot = function(computerIP, virt) {
+            $http.post('http://localhost:7070/api/snapshot/' + computerIP + '/' + virt.name);
+        }
+        vm.clone = function(computerIP, virt) {
+            $http.post('http://localhost:7070/api/clone/' + computerIP + '/' + virt.name);
+        }
+        vm.startVirt = function(computerIP, virt) {
+            $http.post('http://localhost:7070/api/startvirt/' + computerIP + '/' + virt.name);
+        }
+
+        vm.stopVirt = function(computerIP, virt) {
+            $http.post('http://localhost:7070/api/stopvirt/' + computerIP + '/' + virt.name);
         }
 
         vm.refreshData = function() {

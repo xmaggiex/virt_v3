@@ -106,15 +106,16 @@
                         </td>
                         <td>
                             {{ computer.virts[computer.current_machine_index].cpu }}
+                            {{ dashboard.test }}
                         </td>
                         <td>
                             {{ computer.virts[computer.current_machine_index].last_change }}
                         </td>
                         <td class="text-nowrap">
-                            <a ng-click="dashboard.makeSnapshot(dashboard.machine[$index], computer.ip)" class="btn btn-primary btn-sm btn-info">Snapshot</a>
-                            <a ng-click="dashboard.clone(dashboard.machine[$index], computer.ip)" class="btn btn-primary btn-sm btn-info">Clone</a>
-                            <a ng-click="dashboard.startVirt(dashboard.machine[$index], computer.ip)" class="btn btn-primary btn-sm btn-warning">Start</a>
-                            <a ng-click="dashboard.stopVirt(dashboard.machine[$index], computer.ip)" class="btn btn-primary btn-sm btn-danger">Stop</a>
+                            <a ng-click="dashboard.makeSnapshot(computer.ip, computer.virts[computer.current_machine_index])" class="btn btn-primary btn-sm btn-info">Snapshot</a>
+                            <a ng-click="dashboard.clone(computer.ip, computer.virts[computer.current_machine_index])" class="btn btn-primary btn-sm btn-info">Clone</a>
+                            <a ng-click="dashboard.startVirt(computer.ip, computer.virts[computer.current_machine_index])" class="btn btn-primary btn-sm btn-warning">Start</a>
+                            <a ng-click="dashboard.stopVirt(computer.ip, computer.virts[computer.current_machine_index])" class="btn btn-primary btn-sm btn-danger">Stop</a>
                         </td>
                     </tr>
                 </table>
@@ -165,7 +166,7 @@
                         <td>{{ computer.name }}</td>
                         <td><span class="label label-{{ dashboard.status_color['running'] }}">Running</span></td>
                         <td>15:28 08.06.2015</td>
-                        <td>192.192.192.192</td>
+                        <td>{{ computer.ip }}</td>
                         <td>50%</td>
                     </tr>
                 </table>
